@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz de Coordinador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #ffffff; /* Fondo blanco */
+        }
+
+        /* Estilos para botones */
+        #btnSubmit, #btnBack {
+            margin-top: 10px;
+            background-color: #7FFFD4; /* Verde aguamarina */
+            border-color: #7FFFD4; /* Borde verde aguamarina */
+        }
+
+        #btnSubmit:hover, #btnBack:hover {
+            background-color: #66cdaa; /* Verde aguamarina más oscuro al pasar el ratón */
+            border-color: #66cdaa; /* Borde verde aguamarina más oscuro al pasar el ratón */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form th:action="@{/indexCoordinadorLogin}" method="post" class="card bg-white p-4">
+                    <h2 class="mb-4 text-center">Iniciar Sesión como Coordinador</h2>
+                    <div class="form-group">
+                        <label for="usuario" class="float-left">Usuario:</label>
+                        <input type="text" id="usuario" name="usuario" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena" class="float-left">Contraseña:</label>
+                        <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+                    </div>
+                    <input type="submit" id="btnSubmit" value="Iniciar Sesión" class="btn btn-primary btn-block">
+                    <br>
+                    <a th:href="@{http://localhost:8076/}" class="btn btn-secondary btn-block">Regresar</a>
+                </form>
+
+                <!-- Mostrar alerta de error si el usuario y la contraseña son incorrectos -->
+                <div th:if="${error}" class="alert alert-danger mt-4" role="alert">
+                    <strong>Error:</strong> <span th:text="${error}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

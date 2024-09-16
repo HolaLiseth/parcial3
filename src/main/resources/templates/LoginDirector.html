@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión como Director</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilos del formulario */
+        form {
+            background-color: #fefefe;
+            padding: 60px; /* Aumentar el espacio interno del formulario */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 600px; /* Ancho del formulario */
+            max-width: 80%;
+            text-align: center; /* Centrar el contenido del formulario */
+        }
+
+        h2 {
+            margin-bottom: 30px; /* Espacio entre el título y los campos de entrada */
+            font-size: 24px; /* Tamaño del texto del título */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 20px; /* Espacio entre etiquetas y campos de entrada */
+            text-align: left; /* Alinear texto a la izquierda */
+            font-size: 18px; /* Tamaño del texto de las etiquetas */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 20px; /* Aumentar el espacio interno de los campos de entrada */
+            margin-bottom: 30px; /* Espacio entre campos de entrada */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 18px; /* Tamaño del texto de los campos de entrada */
+        }
+
+        /* Estilos para el botón Iniciar Sesión */
+        #btnSubmit, #btnBack {
+            background-color: #4A90E2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 18px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #btnSubmit:hover, #btnBack:hover {
+            background-color: #3266b6;
+        }
+
+        /* Pulsación al hacer clic */
+        #btnSubmit:active, #btnBack:active {
+            transform: translateY(2px);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <form action="@{/indexDirectorLogin}" method="post" style="margin-top: 150px;" class="card bg-light p-4">
+        <h2 class="mb-4 text-center">Iniciar Sesión como Director</h2>
+        <div class="form-group">
+            <label for="correo" class="float-left">Correo:</label>
+            <input type="text" id="correo" name="correo" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="contrasena" class="float-left">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" class="form-control" required>
+        </div>
+        <input type="submit" value="Iniciar Sesión" id="btnSubmit">
+        <br>
+        <a href="http://localhost:8076/" id="btnBack">Regresar</a>
+    </form>
+
+    <!-- Mostrar alerta de error si el usuario y la contraseña son incorrectos -->
+    <div th:if="${error}" class="alert alert-danger mt-4" role="alert" style="margin-top: 20px; background-color: #ffdddd; border: 1px solid #f44336; color: #f44336; padding: 15px; border-radius: 5px;">
+        <strong>Error:</strong> <span th:text="${error}"></span>
+    </div>
+</body>
+</html>

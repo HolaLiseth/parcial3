@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Anteproyecto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Puedes personalizar el color de fondo aquí */
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        function validarFormulario(event) {
+            var director = document.getElementById("director").value;
+            var evaluador = document.getElementById("evaluador").value;
+
+            if (director === evaluador) {
+                alert("Por favor seleccione datos diferentes para director y evaluador.");
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="form-container">
+                    <h2 class="text-center">Agregar Anteproyecto</h2>
+                    <form action="/guardarIdeasproyecto" method="POST" th:object="${Ideasproyecto}" onsubmit="validarFormulario(event)">
+						<input type="hidden" th:field="*{id}" />
+						<div class="form-group">
+						    <label for="titulo">Título del Anteproyecto</label>
+						    <input type="text" class="form-control" th:field="*{descripcion}" placeholder="Título del Anteproyecto" />
+						</div>
+						<div class="form-group">
+						    <label for="director">Director</label>
+						    <select class="form-control" id="director" name="director">
+						        <option th:each="profesor : ${profesores}" 
+						                th:value="${profesor.ced}" 
+						                th:selected="${Ideasproyecto.director != null and profesor.ced == Ideasproyecto.director.ced}">
+						            [[${profesor.nombre}]]
+						        </option>
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label for="evaluador">Evaluador</label>
+						    <select class="form-control" id="evaluador" name="evaluador">
+						        <option th:each="profesor : ${profesores}" 
+						                th:value="${profesor.ced}" 
+						                th:selected="${Ideasproyecto.evaluador != null and profesor.ced == Ideasproyecto.evaluador.ced}">
+						            [[${profesor.nombre}]]
+						        </option>
+						    </select>
+						</div>
+						<div class="form-group">
+						    <label for="fechaInicio">Fecha de Inicio</label>
+						    <input type="date" class="form-control" th:field="*{fecha_creacion}" />
+						</div>
+						<div class="form-group">
+						    <label for="fechaFin">Fecha de Fin</label>
+						    <input type="date" class="form-control" th:field="*{fecha_limite}" />
+						</div>
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

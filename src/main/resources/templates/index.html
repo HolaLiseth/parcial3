@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<title>Title</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+        color: #333;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 100px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px; /* Añadir espacio en la parte superior */
+    }
+
+    .card {
+        height: 100%;
+    }
+
+    header {
+        background-color:  #A67B5B; 
+        color: #000;
+        padding: 3px 1px; 
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    footer {
+        background-color: #A67B5B; 
+        color: #fff;
+        padding: 15px 0;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: auto; /* Mover el pie de página hacia abajo */
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        background-color: #F5F5DC;
+        padding: 30px; 
+        text-align: center; 
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    }
+
+    .card-title {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        background-color:  #964B00; 
+        color: #fff;
+        padding: 20px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color:#654321; 
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Parcial Practico</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel Administrador</h5>
+                    <a th:href="@{LoginAdministrador}" class="btn btn-primary">Acceder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel Coordinador</h5>
+                    <a th:href="@{LoginCoordinador}" class="btn btn-primary">Acceder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel Director</h5>
+                    <a th:href="@{LoginDirector}" class="btn btn-primary">Acceder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel Evaluador</h5>
+                    <a th:href="@{LoginEvaluador}" class="btn btn-primary">Acceder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Panel Estudiantes</h5>
+                    <a th:href="@{LoginEstudiante}" class="btn btn-primary">Acceder</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Base de Datos</h5>
+                    <a href="http://localhost:8076/h2-console/" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Sandra Liseth Guerrero Mantilla - Unidades Tecnologicas de Santander</p>
+    </div>
+</footer>
+
+</body>
+</html>

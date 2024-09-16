@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz de Evaluador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            width: 100%;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<header class="bg-primary py-4">
+    <div class="container text-center">
+        <h1 class="text-white">Interfaz de Evaluador</h1>
+    </div>
+</header>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Evaluar Proyectos</h5>
+                        <a th:href="@{'EvaluarProyectos/' + ${session.idEvaluador}}" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Calendario Academico</h5>
+                        <a href="https://www.uts.edu.co/sitio/wp-content/uploads/normatividad/acuerdos/acu-129.pdf?_t=1706217540" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"> <!-- Agregamos la clase offset-md-4 y mt-4 -->
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Formatos de Grado</h5>
+                        <a href="https://www.dropbox.com/sh/2937zx708zgncsw/AAA0pUsWY74w6GHJ4DksaTa1a/DOCUMENTOS%20DE%20GRADO?dl=0&preview=F-DC-124+Propuesta+trabajo+grado++Investigación%2C+Desarrollo+Tecnológico%2C+Monografía+y+Emprendimiento+V2.doc&subfolder_nav_tracking=1" class="btn btn-primary">Ir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <center><br>
+			<div class="mt-4">
+				    <div class="btn-container">
+				        <a href="/IndexPrincipal" class="btn btn-danger">Cerrar Sesión</a>
+				    </div>
+				</div>
+        </center>
+    </div>
+</div>
+
+<footer class="bg-primary py-4">
+    <div class="container text-center">
+        <p class="text-white">Sandra Liseth Guerrero Mantilla</p>
+        <p class="text-white">Unidades Tecnologicas de Santander</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

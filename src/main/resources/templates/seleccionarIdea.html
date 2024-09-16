@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+<style>
+    /* Estilos personalizados */
+    body {
+        background-color: #7c7578;
+    }
+    .center-text {
+        text-align: center;
+    }
+    /* 1. Cambiar color del texto dentro del header */
+    header.navbar {
+        color: white;
+    }
+    /* 2. Agregar margen a todos los párrafos y títulos */
+    header + div p,
+    header + div h1,
+    header + div h2,
+    header + div h3,
+    header + div h4,
+    header + div h5,
+    header + div h6 {
+        margin-top: 150px;
+    }
+    /* 3. Estilos para el footer */
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+    /* 4. Estilos personalizados para la tabla */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    tbody {
+        background-color: white; /* Cambio de color a blanco */
+    }
+    tbody tr {
+        border-top: none; /* Quita las líneas en el contorno */
+        border-bottom: 1px solid #dee2e6; /* Agrega borde inferior */
+    }
+</style>
+</head>
+<body>
+<header class="navbar navbar-primary bg-primary fixed-top">
+    <div class="container">
+        <h1 class="mx-auto">Lista de AnteProyectos</h1>
+    </div>
+</header>
+<div class="container mt-5">
+    <div th:switch="${not empty proyectoAsignado.rows}">
+        <div th:case="true">
+            <h1 class="center-text">Ya tienes un proyecto asignado.</h1>
+            <div class="center-text">
+                <a href="indexEstudiante.jsp" class="btn btn-primary">Regresar</a>
+            </div>
+        </div>
+        <div th:case="false">
+            <div th:switch="${empty result.rows}">
+                <div th:case="true">
+                    <h1 class="center-text">No hay proyectos disponibles en este momento.</h1>
+                    <div class="center-text">
+                        <a href="indexEstudiante.jsp" class="btn btn-primary">Regresar</a>
+                    </div>
+                </div>
+                <div th:case="false">
+                    <div style="margin-top: 150px;">
+                        <table class="table">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Titulo</th>
+                                    <th>ID_DIRECTOR</th>
+                                    <th>ID_EVALUADOR</th>
+                                    <th>ID_ESTUDIANTE</th>
+                                    <th>LINK DE PAGO</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="fila : ${result.rows}">
+                                    <td th:text="${fila.id}"></td>
+                                    <td th:text="${fila.descripcion}"></td>
+                                    <td th:text="${fila.id_director}"></td>
+                                    <td th:text="${fila.id_evaluador}"></td>
+                                    <td th:text="${fila.id_estudiante}"></td>
+                                    <td>
+                                        <form action="actualizar.jsp" method="post">
+                                            <input type="text" name="url">
+                                            <input type="hidden" name="id" th:value="${fila.id}">
+                                            <input type="hidden" name="id_estudiante" th:value="${sessionScope.idEstudiante}">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary">Seleccionar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="center-text">
+                        <a href="indexEstudiante.jsp" class="btn btn-primary">Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 3. Footer -->
+<footer>
+    <p>&copy; 2024@Sandra Liseth Guerrero Mantilla</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

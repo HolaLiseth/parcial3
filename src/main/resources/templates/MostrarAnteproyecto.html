@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Anteproyectos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header-container {
+            background-color: #007bff;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .container {
+            flex: 1;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header class="header-container">
+    <h1>Lista de AnteProyectos</h1>
+</header>
+
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>ID_DIRECTOR</th>
+                <th>ID_EVALUADOR</th>
+                <th>ID_ESTUDIANTE</th>
+                <th>FECHA CREACION</th>
+                <th>FECHA LIMITE</th>
+                <th>ESTADO</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Ideasproyecto: ${listaIdeasproyecto}">
+                <td th:text="${Ideasproyecto.id}"></td>
+                <td th:text="${Ideasproyecto.descripcion}"></td>
+                <td th:text="${Ideasproyecto.director.ced}"></td>
+                <td th:text="${Ideasproyecto.evaluador.ced}"></td>
+                <td th:text="${Ideasproyecto.estudiante != null ? Ideasproyecto.estudiante.id : 'sin asignar'}"></td>
+                <td th:text="${Ideasproyecto.fecha_creacion}"></td>
+                <td th:text="${Ideasproyecto.fecha_limite}"></td>
+				<td>
+				    <span th:switch="${Ideasproyecto.calificadirector}">
+				        <span th:case="'APROBADO'">
+				            <span th:switch="${Ideasproyecto.calificaevaluador}">
+				                <p th:case="'APROBADO'">FINALIZADO APROBADO</p>
+				                <p th:case="'REPROBADO'">FINALIZADO REPROBADO</p>
+				                <p th:case="*">ESPERANDO CALIFICACION DEL EVALUADOR</p>
+				            </span>
+				        </span>
+				        <span th:case="'REPROBADO'">
+				            <p>ESPERANDO CORRECCIÓN</p>
+				        </span>
+				        <span th:case="*">
+				            <p th:unless="${Ideasproyecto.calificaevaluador}">ESPERANDO CALIFICACION DEL DIRECTOR</p>
+				            <p th:unless="${Ideasproyecto.calificadirector}">ESPERANDO CALIFICACION DEL EVALUADOR</p>
+				            <p th:unless="${Ideasproyecto.calificadirector == Ideasproyecto.calificaevaluador}">Otro mensaje o acción en caso de que las calificaciones sean diferentes</p>
+				        </span>
+				    </span>
+				</td>
+
+				<td>
+				    <form th:action="@{/Ideasproyecto/eliminar}" method="post" class="eliminar-form">
+				        <input type="hidden" name="id" th:value="${Ideasproyecto.id}">
+				        <button type="submit" class="btn btn-danger eliminar-button" data-ced="${Ideasproyecto.id}">Eliminar</button>
+				    </form>
+				    <a th:href="@{'/Ideasproyecto/editarIdeasproyecto/' + ${Ideasproyecto.id}}" class="btn btn-primary">Editar</a>
+				</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-3">
+        <a th:href="@{/InformeProyecto}" class="btn btn-success">Nuevo AnteProyecto</a>
+        <a href="index.Coordinador" class="btn btn-secondary">Regresar</a>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <span>&copy; 2024@Sandra Liseth Guerrero Mantilla</span>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

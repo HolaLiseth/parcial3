@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+<title>Title</title>
+<style>
+    /* Your custom styles here */
+    body {
+        background-Color: #9d9edb;
+        padding-top: 150px; /* Margin between header and cards */
+        position: relative; /* Necessary for footer positioning */
+        min-height: 100vh; /* Ensure footer stays at the bottom */
+    }
+
+    footer {
+        position: absolute; /* Position at the bottom */
+        width: 100%; /* Full width */
+        bottom: 0; /* Stick to the bottom */
+        text-align: center; /* Center text */
+    }
+
+    .btn-container {
+        text-align: center; /* Center the button */
+    }
+</style>
+</head>
+<body>
+
+<header class="bg-primary py-4 fixed-top text-center"> <!-- Centered header text and fixed to top -->
+    <div class="container">
+        <h1 class="text-white">Interfaz de Estudiantes</h1>
+    </div>
+</header>
+
+<div class="container" style="margin-top: 150px;"> <!-- Margin between header and cards -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Ideas de Proyecto de Grado</h5>
+                    <a class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Subir Anteproyecto</h5>
+                    <a  class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Calendario Academico</h5>
+                    <a href="https://www.uts.edu.co/sitio/wp-content/uploads/normatividad/acuerdos/acu-129.pdf?_t=1706217540" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Formatos de Grado</h5>
+                    <a href="https://www.dropbox.com/sh/2937zx708zgncsw/AAA0pUsWY74w6GHJ4DksaTa1a/DOCUMENTOS%20DE%20GRADO?dl=0&preview=F-DC-124+Propuesta+trabajo+grado++Investigación%2C+Desarrollo+Tecnológico%2C+Monografía+y+Emprendimiento+V2.doc&subfolder_nav_tracking=1" class="btn btn-primary">Ir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="mt-4">
+	    <div class="btn-container">
+	        <a href="/IndexPrincipal" class="btn btn-danger">Cerrar Sesión</a>
+	    </div>
+	</div>
+</div>
+
+<footer class="bg-secondary py-4">
+    <div class="container">
+        <p>2024@Sandra Liseth Guerrero Mantilla</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
