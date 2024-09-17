@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #6f8b81;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        table {
+            margin-top: 150px;
+        }
+
+        thead {
+            background-color: #6c757d; /* Cambiado a gris de Bootstrap */
+            color: white;
+        }
+
+        tbody {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>AnteProyecto Estudiantil</h1>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div th:each="fila : ${result.rows}">
+            <div th:if="${fila.calificadirector == 'APROBADO' or fila.calificadirector == null}">
+                <div th:if="${fila.url == null}">
+                    <!-- Si el campo 'url' está vacío, mostrar el formulario para ingresar una URL -->
+                    <form th:action="@{/MostrarAntepro1}" method="post" class="eliminar-form">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th type="hidden">ID</th>
+                                    <th>TITULO</th>
+                                    <th>ID_DIRECTOR</th>
+                                    <th>ID_EVALUADOR</th>
+                                    <th>ID_ESTUDIANTE</th>
+                                    <th>CALIFICACION DEL DIRECTOR</th>
+                                    <th>CALIFICACION DEL EVALUADOR</th>
+                                    <th>ESTADO</th>
+                                    <th>SUBIR FORMATO URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td type="hidden" th:text="${fila.id}" />
+                                    <td th:text="${fila.descripcion}" />
+                                    <td th:text="${fila.id_director}" />
+                                    <td th:text="${fila.id_evaluador}" />
+                                    <td th:text="${fila.id_estudiante}" />
+                                    <td th:text="${fila.calificadirector}" />
+                                    <td th:text="${fila.calificaevaluador}" />
+                                    <td>
+                                        <p th:switch="${fila.calificadirector}">
+                                            <span th:case="'APROBADO' and ${fila.calificaevaluador} == 'APROBADO'">FINALIZADO APROBADO</span>
+                                            <span th:case="'APROBADO' and ${fila.calificaevaluador} == 'REPROBADO'">FINALIZADO REPROBADO</span>
+                                            <span th:case="'REPROBADO' and ${fila.calificaevaluador} == null">ESPERANDO CORRECCION</span>
+                                            <span th:case="'APROBADO' and ${fila.calificaevaluador} == null">ESPERANDO CALIFICACION DEL EVALUADOR</span>
+                                            <span th:case="*" >EN PROCESO DE CALIFICACION</span>
+                                        </p>
+                                    </td>
+                                    <td><input type="text" th:id="'url-' + ${fila.id}" th:name="url" th:for="'url-' + ${fila.id}" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <center>
+                            <input type="submit" value="Guardar" class="btn btn-primary" /> <!-- Cambiado a estilo de botón de Bootstrap -->
+                            <a href="indexEstudiante.jsp" class="btn btn-secondary">Regresar</a><br> <!-- Cambiado a estilo de botón de Bootstrap -->
+                        </center>
+                    </form>
+                </div>
+                <div th:if="${fila.url != null}">
+                    <!-- Si el campo 'url' ya está lleno, mostrar un mensaje -->
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th type="hidden">ID</th>
+                                <th>TITULO</th>
+                                <th>ID_DIRECTOR</th>
+                                <th>ID_EVALUADOR</th>
+                                <th>ID_ESTUDIANTE</th>
+                                <th>CALIFICACION DEL DIRECTOR</th>
+                                <th>CALIFICACION DEL EVALUADOR</th>
+                                <th>ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td type="hidden" th:text="${fila.id}" />
+                                <td th:text="${fila.descripcion}" />
+                                <td th:text="${fila.id_director}" />
+                                <td th:text="${fila.id_evaluador}" />
+                                <td th:text="${fila.id_estudiante}" />
+                                <td th:text="${fila.calificadirector}" />
+                                <td th:text="${fila.calificaevaluador}" />
+                                <td>
+                                    <p th:switch="${fila.calificadirector}">
+                                        <span th:case="'APROBADO' and ${fila.calificaevaluador} == 'APROBADO'">FINALIZADO APROBADO</span>
+                                        <span th:case="'APROBADO' and ${fila.calificaevaluador} == 'REPROBADO'">FINALIZADO REPROBADO</span>
+                                        <span th:case="'REPROBADO' and ${fila.calificaevaluador} == null">ESPERANDO CORRECCION</span>
+                                        <span th:case="'APROBADO' and ${fila.calificaevaluador} == null">ESPERANDO CALIFICACION DEL EVALUADOR</span>
+                                        <span th:case="*" >EN PROCESO DE CALIFICACION</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <center>
+                        <a href="indexEstudiante.jsp" class="btn btn-secondary">Regresar</a><br>
+						                    </center>
+						                </div>
+						            </div>
+						            <div th:unless="${fila.calificadirector == 'APROBADO' or fila.calificadirector == null}">
+						                <!-- Modal -->
+						                <div class="modal fade" id="reprobadoModal" tabindex="-1" role="dialog" aria-labelledby="reprobadoModalLabel" aria-hidden="true">
+						                    <div class="modal-dialog" role="document">
+						                        <div class="modal-content">
+						                            <div class="modal-header">
+						                                <h5 class="modal-title" id="reprobadoModalLabel">Su proyecto ha sido reprobado por el director. Por favor, corríjalo y envíelo en el siguiente espacio.</h5>
+						                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                                    <span aria-hidden="true">&times;</span>
+						                                </button>
+						                            </div>
+						                            <div class="modal-body">
+						                                <form id="reprobadoForm" th:action="@{/MostrarAntepro1}" method="post">
+						                                    <div class="form-group">
+						                                        <label for="urlModal">Link o URL:</label>
+						                                        <input type="text" class="form-control" id="urlModal" name="urlModal">
+						                                    </div>
+						                                </form>
+						                            </div>
+						                            <div class="modal-footer">
+						                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						                                <button type="submit" form="reprobadoForm" class="btn btn-primary">Enviar</button>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						                <!-- JavaScript para redireccionar después de la actualización -->
+						                <script th:if="${param.urlModal != null}">
+						                    window.location.href = "indexEstudiante.jsp";
+						                </script>
+						            </div>
+						        </div>
+						        <!-- Abre el modal con el ID 'reprobadoModal' -->
+						        <script th:if="${fila.calificadirector != 'APROBADO' and fila.calificadirector != null}">
+						            $(document).ready(function() {
+						                $('#reprobadoModal').modal('show');
+						            });
+						        </script>
+						    </div>
+						    <footer>
+						        <div class="container">
+						            <p>2024@Sandra Liseth Guerrero Mantilla</p>
+						        </div>
+						    </footer>
+						    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+						    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+						    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+						</body>
+
+						</html>

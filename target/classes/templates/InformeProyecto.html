@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Anteproyectos por Estudiante</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            margin-top: 10px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body><br><br><br><br><br><br>
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center mb-4">Lista de AnteProyectos por Estudiante</h1>
+        <form th:action="@{/tuUrl}" method="get">
+            <div class="form-group">
+                <center><label for="cedula">Ingrese la cédula del estudiante:</label></center>
+                <input type="text" id="cedula" name="cedula" class="form-control" required>
+            </div>
+            <center>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            <a th:href="@{/index.Coordinador}" class="btn btn-secondary">Regresar</a>
+            </center>
+        </form>
+    </div>
+
+    <div th:if="${not #strings.isEmpty(param.cedula)}">
+
+    </div>
+
+    <table th:if="${not #lists.isEmpty(result.rows)}" class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>ID Director</th>
+            <th>ID Evaluador</th>
+            <th>ID Estudiante</th>
+            <th>Fecha Creación</th>
+            <th>Fecha Límite</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fila : ${result.rows}" th:if="${param.cedula == fila.id_estudiante}">
+            <td th:text="${fila.id}"></td>
+            <td th:text="${fila.descripcion}"></td>
+            <td th:text="${fila.id_director}"></td>
+            <td th:text="${fila.id_evaluador}"></td>
+            <td th:text="${fila.id_estudiante}"></td>
+            <td th:text="${fila.fecha_creacion}"></td>
+            <td th:text="${fila.fecha_limite}"></td>
+            <td>
+                <span th:if="${fila.calificadirector == 'APROBADO' && fila.calificaevaluador == 'APROBADO'}">FINALIZADO APROBADO</span>
+                <span th:if="${fila.calificadirector == 'REPROBADO' && fila.calificaevaluador == 'REPROBADO'}">FINALIZADO REPROBADO</span>
+                <span th:if="${fila.calificadirector == 'APROBADO' && fila.calificaevaluador == 'REPROBADO'}">ESPERANDO CORRECCIÓN</span>
+                <span th:if="${fila.calificadirector == 'REPROBADO' && fila.calificaevaluador == null}">FINALIZADO REPROBADO</span>
+                <span th:if="${fila.calificadirector == null && fila.calificaevaluador == null}">EN PROCESO DE CALIFICACION</span>
+                <span th:if="${fila.calificadirector == 'APROBADO' && fila.calificaevaluador == null}">ESPERANDO CALIFICACION DEL EVALUADOR</span>
+                <span th:unless="${fila.calificadirector == 'APROBADO' || fila.calificaevaluador == 'APROBADO' || fila.calificadirector == 'REPROBADO' || fila.calificaevaluador == 'REPROBADO' || fila.calificadirector == null || fila.calificaevaluador == null}">Otro mensaje o acción en caso de que las calificaciones sean diferentes</span>
+            </td>
+            <td>
+                <form th:action="@{/tuUrl}" method="post" class="eliminar-form">
+                    <input type="hidden" name="id" th:value="${fila.id}">
+                    <button type="submit" class="btn btn-danger eliminar-button" th:attr="data-ced=${fila.id}">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script th:if="${param.id != null}">
+        /* Función para recargar la página */
+        function recargarPagina() {
+            location.reload();
+        }
+
+        /* Asignar la función recargarPagina al evento 'submit' del formulario */
+        document.querySelectorAll('.eliminar-form').forEach(form => {
+            form.addEventListener('submit', recargarPagina);
+        });
+    </script>
+</div>
+</body>
+</html>

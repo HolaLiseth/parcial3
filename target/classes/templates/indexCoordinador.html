@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz de Coordinador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        header, footer {
+            background-color: #2E8B57; /* Verde */
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #2E8B57; /* Verde */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #3CB371; /* Verde más oscuro al pasar el ratón */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Interfaz de Coordinador</h1>
+    </div>
+</header>
+
+<div class="container">
+   <table>
+        <tr>
+            <td>
+                <a href="MostrarAntepro.jsp">Crear Anteproyecto</a>
+            </td>
+            <td>
+                <a href="Informepro.jsp">Informe del Proyecto</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://www.uts.edu.co/sitio/wp-content/uploads/normatividad/acuerdos/acu-129.pdf?_t=1706217540">Calendario Academico</a>
+            </td>
+            <td>
+                <a href="https://www.dropbox.com/sh/2937zx708zgncsw/AAA0pUsWY74w6GHJ4DksaTa1a/DOCUMENTOS%20DE%20GRADO?dl=0&preview=F-DC-124+Propuesta+trabajo+grado++Investigación%2C+Desarrollo+Tecnológico%2C+Monografía+y+Emprendimiento+V2.doc&subfolder_nav_tracking=1">Formatos de Grado</a>
+            </td>
+        </tr>
+    </table>
+    <center>
+        <div class="btn-container">
+            <a href="../index.html"><button class="btn">Cerrar Sesion</button></a>
+        </div>
+    </center>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Unidades Tecnologicas de Santander</p>
+    </div>
+</footer>
+
+</body>
+</html>
